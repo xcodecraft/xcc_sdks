@@ -1,0 +1,91 @@
+_env:
+    - !R.env
+        _name    : "_dev"
+        _res :
+            - !R.project
+                root    : "${HOME}/devspace/xcc_sdks"
+                name    : "xcc_sdks"
+            - !R.vars
+                SDK_ENV : "dev"
+
+    - !R.env
+        _name    : "_demo"
+        _res :
+            - !R.project
+                root : "/data/x/sdks"
+                name : "xcc_sdks"
+            - !R.vars
+                SDK_ENV : "demo"
+
+    - !R.env
+        _name    : "_test"
+        _res :
+            - !R.project
+                root : "/data/x/sdks"
+                name : "xcc_sdks"
+            - !R.vars
+                SDK_ENV : "test"
+
+    - !R.env
+        _name : "base"
+        _res :
+            - !R.path
+                dst  : "${PRJ_ROOT}/conf/used"
+            - !R.vars
+                local_proxy_home : "/data/x/svcs/local_proxy"
+
+
+    - !R.env
+        _name    : "dev"
+        _mix     : "_dev,base"
+
+    - !R.env
+        _name    : "demo"
+        _mix     : "_demo,base"
+
+    - !R.env
+        _name    : "test"
+        _mix     : "_test,base"
+
+_sys:
+
+    # -  !R.system
+    #     _name : "local_proxy"
+    #     _res  :
+    #         - !R.vars
+    #             BASE_ONLINE : "mararun.cn"
+    #             BASE_DEMO  : "demo.mararun.cn"
+    #         - !R.using
+    #              path  : "${PRJ_ROOT}/_rg/mod.yaml"
+    #              modul : "vcl"
+    #              args  : !R.vars
+    #                 V_TAG           : "plato"
+    #                 V_DEMO_DOMAIN   : "api.plato.demo.mararun.cn"
+    #                 V_ONLINE_DOMAIN : "api.plato.mararun.cn"
+    #                 V_CHECK         : "/env/online/scene/self_monitor"
+
+
+    -  !R.system
+        _name : "test"
+        _res  :
+            - !R.vars
+                PHP_INI: "${PRJ_ROOT}/conf/used/test_php.ini"
+                INCLUDE_PATH : "${PRJ_ROOT}/src:${PRJ_ROOT}/test"
+                PYLON  : "/data/x/framework/pylon-ng/"
+
+            - !R.pylon_autoload
+                include : "${PRJ_ROOT}/src"
+
+            - !R.file_tpl
+                 tpl    : "${PRJ_ROOT}/conf/options/test_php.ini"
+                 dst    : "${PHP_INI}"
+                    #
+            # - !R.pylon_router
+            #     include : "${API_ENTRY}"
+            - !R.php
+                # bin     : "${PHP_BIN}"
+                script  : "/usr/local/php/bin/phpunit"
+                args    : "--configuration ${PRJ_ROOT}/test/phpunit.xml --coverage-clover test/reports/phpunit.coverage.xml --log-junit test/reports/phpunit.report.xml"
+            #- !R.shell
+            #    script : "${PRJ_ROOT}/src/demo.sh"
+

@@ -1,0 +1,17 @@
+/run
+/conf/used
+/run.log
+/*.swp
+/*.swo
+/node_modules
+/dist
+.*
+cscope.out
+sdk
+sdk_test
+tags
+_rg/.rigger*
+*.log
+doc
+/src/conf/sdks_conf.php
+test/reports/

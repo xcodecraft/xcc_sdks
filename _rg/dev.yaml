@@ -1,0 +1,9 @@
+_dev:
+    - !C.project
+        name : "ayi_base_sdks"
+        root : "${HOME}/devspace/ayi_base_sdks"
+    - !C.version
+        file : "src/version.txt"
+    - !C.git
+        remote : "git@github.com:xcodecraft/xxxx.git"
+
