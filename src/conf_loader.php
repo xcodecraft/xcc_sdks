@@ -1,5 +1,4 @@
 <?php
-use Peekmo\JsonPath\JsonStore ;
 
 class XConfObj
 {
@@ -10,6 +9,7 @@ class XConfObj
         $this->data =  json_decode($json,true) ;
 
     }
+    //TODO : 简单实现,没有完整支持 xpath ;
     public function xpath($path)
     {
         $data = $this->data ;
