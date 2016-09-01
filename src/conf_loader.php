@@ -46,11 +46,40 @@ class XConfObj
 }
 class XConfLoader
 {
+    const XCC = "xcc" ;
+    const ALI = "ali" ;
 
-    static public function load($path)
+    static private $reg_paths = array() ;
+    static public function regist($name,$path)
     {
+        static::$reg_paths[$name] = $path ;
+    }
+    static public function registXCC($env_name)
+    {
+        static::regist(static::XCC,static::needEnv($env_name)) ;
+
+    }
+    static public function registALI($env_name)
+    {
+        static::regist(static::ALI,static::needEnv($env_name)) ;
+
+    }
+
+    static public function load($name)
+    {
+        $path = static::$reg_paths[$name] ;
         $json = file_get_contents($path);
         return new XConfObj($json,$path) ;
+    }
+    static public function needEnv($name)
+    {
+        $val = $_SERVER[$name] ;
+        if($val == null)
+        {
+            throw new LogicException("not found $env_name env val!") ;
+        }
+        return $val ;
+
     }
 
 }

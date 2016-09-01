@@ -2,8 +2,6 @@
 
 class HydraConfLoader
 {
-    static $conf_file = "/data/x/tools/env_setting/conf/xcc/sdks_conf.php" ;
-
     static public function hash($str) {
         //hash(i) = hash(i-1) * 33 + str[i]
         $hash = 0;
@@ -38,12 +36,12 @@ class HydraConfLoader
 
     static public function getSubscibes()
     {
-        $confObj  = XConfLoader::load(static::$conf_file ) ;
+        $confObj  = XConfLoader::load(XConfLoader::XCC) ;
         return $confObj->xpath("/hydra/subscibes") ;
     }
     static public function getCollectors()
     {
-        $confObj  = XConfLoader::load(static::$conf_file ) ;
+        $confObj  = XConfLoader::load(XConfLoader::XCC) ;
         return $confObj->xpath("/hydra/collectors") ;
     }
 
