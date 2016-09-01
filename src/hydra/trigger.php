@@ -68,7 +68,7 @@ class HydraEmptyLogger
 class Hydra
 {
     static $logger = null ;
-    static public function trigger($topic, $data, $tag=null,$delay=0,$ttl=60) 
+    static public function trigger($topic, $data, $tag=null,$delay=0,$ttl=60)
     {
         require_once(dirname(__file__) ."/impl/hydra_bstalk.php")  ;
         static $impl           = null ;
@@ -77,7 +77,7 @@ class Hydra
         $dto       = HydraDTO::create($topic,$data,$tag) ;
         $dto->encode();
         $json_data = json_encode($dto) ;
-        $objid     = $impl->trigger(HydraConf::TOPIC_EVENT, $json_data,  self::$logger,$delay, $ttl) ;
+        $objid     = $impl->trigger(HydraDefine::TOPIC_EVENT, $json_data,  self::$logger,$delay, $ttl) ;
 
     }
 }

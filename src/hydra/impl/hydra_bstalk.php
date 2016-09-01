@@ -40,7 +40,7 @@ class HydraBStalk implements ICollector , IConsumer
             }
             catch( Pheanstalk_Exception_ConnectionException $e)
             {
-                $logger->error($e->getMessage) ;
+                $logger->error($e->getMessage()) ;
             }
         }
         if(!$issuc)
@@ -53,7 +53,7 @@ class HydraBStalk implements ICollector , IConsumer
         static $queues = array() ;
         if(empty($queues ))
         {
-            $confs = HydraConf::$collectors;
+            $confs = HydraConfLoader::getCollectors();
             foreach($confs as $conf)
             {
                 list($host,$port) = explode(':',$conf) ;
@@ -94,10 +94,11 @@ class HydraBStalk implements ICollector , IConsumer
         return $ins ;
 
     }
-    static private function subIns($topic)
+    static private function subIns($topic,$logger)
     {
         static $queues = array() ;
         $conf          = HydraConfLoader::getSubConf($topic);
+        $logger->debug( "topic [$topic] use $conf" ) ;
         if(!isset($queues[$conf]))
         {
             list($host,$port) = explode(':',$conf) ;
@@ -110,7 +111,7 @@ class HydraBStalk implements ICollector , IConsumer
     public function consume($topic, $workFun, $stopFun, $logger  ,$timeout=5 )
     {
         $tag   = "consume@$topic" ;
-        $Q     = self::subIns($topic) ;
+        $Q     = self::subIns($topic,$logger) ;
         while(true)
         {
             $logger->info("watch $topic","consume") ;

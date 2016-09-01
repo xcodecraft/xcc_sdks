@@ -4,9 +4,14 @@ class XConfObj
 {
 
     private $data ;
-    public function __construct($json)
+    public function __construct($json,$from)
     {
+        $this->from = $from ;
         $this->data =  json_decode($json,true) ;
+        if($this->data == null)
+        {
+            throw new LogicException("bad json format! [{$this->from}]") ;
+        }
 
     }
     //TODO : 简单实现,没有完整支持 xpath ;
@@ -25,13 +30,18 @@ class XConfObj
             {
                 continue ;
             }
-            $data = $this->getNode($data,$key) ;
+            $data = $this->getNode($data,$key,$path) ;
         }
         return $data;
     }
-    private function getNode($data,$key)
+    private function getNode($data,$key,$path)
     {
-        return $data[$key] ;
+        $found = $data[$key] ;
+        if($found === null)
+        {
+            throw new LogicException("not found [$path : $key] conf in [{$this->from}]") ;
+        }
+        return $found ;
     }
 }
 class XConfLoader
@@ -40,7 +50,7 @@ class XConfLoader
     static public function load($path)
     {
         $json = file_get_contents($path);
-        return new XConfObj($json) ;
+        return new XConfObj($json,$path) ;
     }
 
 }
