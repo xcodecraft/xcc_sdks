@@ -67,6 +67,10 @@ class XConfLoader
 
     static public function load($name)
     {
+        if(!isset(static::$reg_paths[$name]))
+        {
+            throw new LogicException("not regist [$name] to XConfLoader ") ;
+        }
         $path = static::$reg_paths[$name] ;
         $json = file_get_contents($path);
         return new XConfObj($json,$path) ;
