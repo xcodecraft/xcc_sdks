@@ -1,10 +1,10 @@
 <?php
+namespace XCC ;
 require_once(dirname(dirname(__file__)) ."/conf_loader.php")  ;
 require_once(dirname(__file__) ."/hydra.php")  ;
 
-namespace xcc ;
 
-XConfLoader::regist(XConfLoader::XCC,"/data/x/etc/env_conf/conf/xcc/sdks_conf.json") ;
+XConfLoader::regist(XConfLoader::XCC,"/data/x/etc/env_conf/conf/XCC/sdks_conf.json") ;
 
 $g_debug = false ;
 if ($argc == 2 && $argv[1] == "-d" )

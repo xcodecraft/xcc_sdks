@@ -1,5 +1,5 @@
 <?php
-namespace xcc ;
+namespace XCC ;
 
 class HydraDTO
 {

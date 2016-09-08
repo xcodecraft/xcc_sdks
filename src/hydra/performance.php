@@ -1,7 +1,7 @@
 <?php
+namespace XCC ;
 require_once(dirname(__file__) ."/hydra.php")  ;
 
-namespace xcc ;
 
 class ConsumePing implements HydraConsume
 {

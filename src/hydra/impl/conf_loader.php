@@ -1,6 +1,6 @@
 <?php
 
-namespace xcc ;
+namespace XCC ;
 
 class HydraConfLoader
 {
