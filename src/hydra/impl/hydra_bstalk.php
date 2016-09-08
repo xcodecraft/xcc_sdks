@@ -4,6 +4,7 @@ require_once("$platform/hydra/beanstalk/beanstalkmq.php") ;
 require_once("$platform/hydra/impl/interface.php") ;
 require_once("$platform/hydra/impl/conf_loader.php") ;
 
+namespace xcc ;
 
 
 class HydraBStalk implements ICollector , IConsumer

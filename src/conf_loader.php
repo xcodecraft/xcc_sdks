@@ -1,5 +1,8 @@
 <?php
 
+namespace xcc ;
+use LogicException ;
+
 class XConfObj
 {
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace xcc ;
+
 class HydraConfLoader
 {
     static public function hash($str) {

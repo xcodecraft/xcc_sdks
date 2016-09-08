@@ -1,5 +1,6 @@
 <?php
 
+namespace xcc ;
 
 class HydraCmd
 {

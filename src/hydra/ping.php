@@ -2,6 +2,8 @@
 require_once(dirname(dirname(__file__)) ."/conf_loader.php")  ;
 require_once(dirname(__file__) ."/hydra.php")  ;
 
+namespace xcc ;
+
 XConfLoader::regist(XConfLoader::XCC,"/data/x/etc/env_conf/conf/xcc/sdks_conf.json") ;
 
 $g_debug = false ;

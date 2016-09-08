@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__file__) ."/impl/hydra_bstalk.php")  ;
 
+namespace xcc ;
 
 interface HydraConsume
 {
@@ -17,7 +18,7 @@ class HydraSvc
     {
         $this->impl = new HydraBStalk();
     }
-    public function serving($logger = null ,$timeout = 5  ) 
+    public function serving($logger = null ,$timeout = 5  )
     {
 
         if(empty($logger)) $logger = new HydraEmptyLogger();
@@ -29,7 +30,7 @@ class HydraSvc
         {
             $logger->debug("job data:" . $data , $tag) ;
             $obj = HydraDTO::fromJson($data) ;
-            if($obj == null) 
+            if($obj == null)
             {
                 if($logger) $logger->warn("bad HydraDTO",$tag) ;
                 return  ;
