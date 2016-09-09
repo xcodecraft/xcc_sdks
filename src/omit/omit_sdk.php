@@ -1,5 +1,6 @@
 <?php
-require_once(dirname(dirname(__file__)) ."/conf/sdks_conf.php");
+
+namespace xcc ;
 
 class OmitSDK {
     static public function conf($domain, $port=8086, $proxy=null )
@@ -23,12 +24,12 @@ class OmitSDK {
     }
 
     public function omit($app, $keys, $attr) {
-       return $this->svc->omit($app, $keys, $attr); 
+       return $this->svc->omit($app, $keys, $attr);
     }
 
 
     public function incr($name, $value = 1) {
-       return $this->svc->incr($name, $value); 
+       return $this->svc->incr($name, $value);
     }
 
     public function get($name) {

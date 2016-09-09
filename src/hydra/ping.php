@@ -1,5 +1,10 @@
 <?php
+namespace XCC ;
+require_once(dirname(dirname(__file__)) ."/conf_loader.php")  ;
 require_once(dirname(__file__) ."/hydra.php")  ;
+
+
+XConfLoader::regist(XConfLoader::XCC,"/data/x/etc/env_conf/conf/xcc/sdks_conf.json") ;
 
 $g_debug = false ;
 if ($argc == 2 && $argv[1] == "-d" )
@@ -10,11 +15,11 @@ if ($argc == 2 && $argv[1] == "-d" )
 
 class Ping
 {
-    static $recved = true ; 
+    static $recved = true ;
     static $i      = 0 ;
     static public function send()
     {
-        $i = self::$i ; 
+        $i = self::$i ;
         if(!self::$recved ) return false ;
         if(!self::needReceive()) return false ;
         echo "$i  Hydra ping ---- " ;
@@ -34,7 +39,7 @@ class Ping
         list($index,$begin) = explode(',',$dto->data);
         $end   = time();
         $use   = $end - $begin;
-        if((int)$index == self::$i) 
+        if((int)$index == self::$i)
         {
             self::$recved = true ;
             echo "------------------ $index use  ($use) sec\n" ;
@@ -47,7 +52,7 @@ class Ping
 
 class Clean implements HydraConsume
 {
-    public function consume(HydraDTO $dto) 
+    public function consume(HydraDTO $dto)
     {
         echo "clean {$dto->data} \n" ;
         return true ;
@@ -62,9 +67,9 @@ class Clean implements HydraConsume
 
 class ConsumePing implements HydraConsume
 {
-    public function consume(HydraDTO $dto) 
+    public function consume(HydraDTO $dto)
     {
-        if( Ping::receive($dto) ) 
+        if( Ping::receive($dto) )
         {
             sleep(1) ;
             ping::send();

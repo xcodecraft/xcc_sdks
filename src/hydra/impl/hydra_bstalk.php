@@ -1,10 +1,15 @@
 <?php
+namespace XCC ;
 $platform =  dirname(dirname(dirname(__FILE__)));
 require_once("$platform/hydra/beanstalk/beanstalkmq.php") ;
 require_once("$platform/hydra/impl/interface.php") ;
 require_once("$platform/hydra/impl/conf_loader.php") ;
 
 
+// use XCC\IConsumer ;
+// use XCC\ICollector ;
+// use XCC\HydraCmd ;
+//
 
 class HydraBStalk implements ICollector , IConsumer
 {
@@ -40,7 +45,7 @@ class HydraBStalk implements ICollector , IConsumer
             }
             catch( Pheanstalk_Exception_ConnectionException $e)
             {
-                $logger->error($e->getMessage) ;
+                $logger->error($e->getMessage()) ;
             }
         }
         if(!$issuc)
@@ -53,14 +58,14 @@ class HydraBStalk implements ICollector , IConsumer
         static $queues = array() ;
         if(empty($queues ))
         {
-            $confs = HydraConf::$collectors;
+            $confs = HydraConfLoader::getCollectors();
             foreach($confs as $conf)
             {
                 list($host,$port) = explode(':',$conf) ;
                 try {
-                    array_push($queues ,new Pheanstalk_Pheanstalk($host, $port, HydraDefine::TIMEOUT));
+                    array_push($queues ,new \Pheanstalk_Pheanstalk($host, $port, HydraDefine::TIMEOUT));
                 }
-                catch( Pheanstalk_Exception_ConnectionException $e)
+                catch( \Pheanstalk_Exception_ConnectionException $e)
                 {
                     echo $e->getMessage();
 
@@ -71,18 +76,6 @@ class HydraBStalk implements ICollector , IConsumer
 
     }
 
-    static private function vipIns()
-    {
-
-        static $ins = null ;
-        if(empty($ins))
-        {
-            list($host,$port) = explode(':',HydraConf::$vipQueue) ;
-            $ins = new Pheanstalk_Pheanstalk($host, $port, HydraDefine::TIMEOUT) ;
-        }
-        return $ins ;
-
-    }
 
     static private function rollIns()
     {
@@ -94,14 +87,15 @@ class HydraBStalk implements ICollector , IConsumer
         return $ins ;
 
     }
-    static private function subIns($topic)
+    static private function subIns($topic,$logger)
     {
         static $queues = array() ;
         $conf          = HydraConfLoader::getSubConf($topic);
+        $logger->debug( "topic [$topic] use $conf" ) ;
         if(!isset($queues[$conf]))
         {
             list($host,$port) = explode(':',$conf) ;
-            $queues[$conf]    = new Pheanstalk_Pheanstalk($host, $port, HydraDefine::TIMEOUT);
+            $queues[$conf]    = new \Pheanstalk_Pheanstalk($host, $port, HydraDefine::TIMEOUT);
         }
         return $queues[$conf] ;
 
@@ -110,7 +104,7 @@ class HydraBStalk implements ICollector , IConsumer
     public function consume($topic, $workFun, $stopFun, $logger  ,$timeout=5 )
     {
         $tag   = "consume@$topic" ;
-        $Q     = self::subIns($topic) ;
+        $Q     = self::subIns($topic,$logger) ;
         while(true)
         {
             $logger->info("watch $topic","consume") ;

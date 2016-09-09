@@ -1,9 +1,11 @@
 <?php
+namespace XCC ;
 require_once(dirname(__file__) ."/hydra.php")  ;
+
 
 class ConsumePing implements HydraConsume
 {
-    public function consume(HydraDTO $dto) 
+    public function consume(HydraDTO $dto)
     {
         static $i =0 ;
         $i++ ;
@@ -30,7 +32,7 @@ $pid = pcntl_fork() ;
 if ($pid == -1 )
 {
     die("could not fork") ;
-} 
+}
 else if ($pid == 0)
 {
     //send process !

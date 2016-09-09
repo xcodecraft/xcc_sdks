@@ -1,6 +1,6 @@
 <?php
+namespace XCC ;
 require_once(dirname(__file__) ."/impl/hydra_bstalk.php")  ;
-
 
 interface HydraConsume
 {
@@ -17,7 +17,7 @@ class HydraSvc
     {
         $this->impl = new HydraBStalk();
     }
-    public function serving($logger = null ,$timeout = 5  ) 
+    public function serving($logger = null ,$timeout = 5  )
     {
 
         if(empty($logger)) $logger = new HydraEmptyLogger();
@@ -29,7 +29,7 @@ class HydraSvc
         {
             $logger->debug("job data:" . $data , $tag) ;
             $obj = HydraDTO::fromJson($data) ;
-            if($obj == null) 
+            if($obj == null)
             {
                 if($logger) $logger->warn("bad HydraDTO",$tag) ;
                 return  ;
@@ -46,12 +46,12 @@ class HydraSvc
 
         if(empty($logger)) $logger = new HydraEmptyLogger();
         $cmd = new HydraCmd;
-        $cmd->cmd    = "subscribe" ;
-        $cmd->client = $client ;
-        $cmd->topic  = $topic ;
+        $cmd->cmd           = "subscribe" ;
+        $cmd->client        = $client ;
+        $cmd->topic         = $topic ;
         $this->impl->cmd($cmd,$logger) ;
-        $this->consumeTopic =  "$topic-$client" ;
-        $this->consumeObj   =  $consumeObj ;
+        $this->consumeTopic = "$topic-$client" ;
+        $this->consumeObj   = $consumeObj ;
     }
     public function unSubscribe($topic,$client,$logger=null)
     {

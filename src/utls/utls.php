@@ -1,4 +1,7 @@
 <?php
+
+namespace xcc ;
+
 class NullProxy
 {
     public function __construct($origin)

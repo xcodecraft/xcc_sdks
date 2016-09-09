@@ -1,9 +1,9 @@
 <?php
 
+namespace XCC ;
+
 class HydraConfLoader
 {
-    static $conf_file = "/data/x/tools/env_setting/conf/xcc/sdks_conf.php" ;
-
     static public function hash($str) {
         //hash(i) = hash(i-1) * 33 + str[i]
         $hash = 0;
@@ -20,25 +20,31 @@ class HydraConfLoader
     static public function  getSubConf($topic)
     {
         // $qConfs = HydraConf::subConfs();
-        $hVal    = self::hash($topic) ;
-        $confObj = XConfLoader::load(static::$conf_file ) ;
-        $qConfs  = $confObj->xpath("/hydra/collectos") ;
+        $hVal    = static::hash($topic) ;
+        $qConfs  = static::getSubscibes();
         $start   = 0 ;
 
-        foreach ($qConfs as $key=>$conf)
+        foreach ($qConfs as $conf)
         {
-            if ($hVal > $start  &&  $hVal < $key)
+            $max = hexdec($conf['max']) ;
+            if ($hVal > $start  &&  $hVal < $max)
             {
-                return $conf;
+                return $conf['addr'];
             }
-            $start = $key ;
+            $start = $max ;
         }
         return null ;
     }
+
+    static public function getSubscibes()
+    {
+        $confObj  = XConfLoader::load(XConfLoader::XCC) ;
+        return $confObj->xpath("/hydra/subscibes") ;
+    }
     static public function getCollectors()
     {
-        $confObj  = XConfLoader::load(static::$conf_file ) ;
-        return $confObj->xpath("/hydra/collectos") ;
+        $confObj  = XConfLoader::load(XConfLoader::XCC) ;
+        return $confObj->xpath("/hydra/collectors") ;
     }
 
 }
