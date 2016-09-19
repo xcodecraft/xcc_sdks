@@ -1,6 +1,6 @@
 <?php
 
-use xcc\XConfLoader ;
+use XCC\XConfLoader ;
 
 $dataPath  = XSetting::ensureEnv("PRJ_ROOT") ;
 $dataPath .= "/test/data/conf.json" ;

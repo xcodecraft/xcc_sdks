@@ -1,4 +1,9 @@
 <phpunit bootstrap="bootstrap.php" colors="true" >
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../src/</directory>
+        </whitelist>
+    </filter>
     <testsuites>
         <testsuite name = "cases">
             <directory suffix = "test.php">cases</directory>

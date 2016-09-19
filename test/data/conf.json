@@ -1,6 +1,11 @@
 {
-        "hydra" : {
-            "collectors" : ["127.0.0.1:11300"] ,
-            "subscibes"   : ["127.0.0.1:11301","127.0.0.1:11302"]
-        }
+    "hydra" : {
+        "collectors" : ["127.0.0.1:11300"] ,
+        "subscibes"   : ["127.0.0.1:11301","127.0.0.1:11302"]
+    },
+    "kvstore" : {
+        "host" : "3a6c14d1c517408d.redis.rds.aliyuncs.com" ,
+        "port" : 6379 ,
+        "auth" : "Ieq6kabZiGTgQPt"
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use xcc\XConfLoader ;
+use XCC\XConfLoader ;
 
 class XCCSDKTest  extends PHPUnit_Framework_TestCase
 {
@@ -13,6 +13,10 @@ class XCCSDKTest  extends PHPUnit_Framework_TestCase
         $this->assertTrue(!empty($data)) ;
 
         $data      = $confObj->xpath("/hydra/subscibes") ;
+        $this->assertTrue(!empty($data)) ;
+
+
+        $data      = $confObj->xpath("/kvstore") ;
         $this->assertTrue(!empty($data)) ;
     }
 
