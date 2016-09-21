@@ -1,7 +1,7 @@
 <?php
 
 use XCC\XConfLoader ;
-
+use XCC\Xuuid ;
 class XCCSDKTest  extends PHPUnit_Framework_TestCase
 {
 
@@ -18,6 +18,10 @@ class XCCSDKTest  extends PHPUnit_Framework_TestCase
 
         $data      = $confObj->xpath("/kvstore") ;
         $this->assertTrue(!empty($data)) ;
+    }
+    public function testXuuid()
+    {
+        $uid = Xuuid::id() ;
     }
 
 }
