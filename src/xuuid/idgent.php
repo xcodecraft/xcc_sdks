@@ -1,7 +1,7 @@
 <?php
 namespace XCC ;
 require_once("xuuid.php");
-class XuuidIDGer : implements \XIDGenerator
+class XuuidIDGer  implements \XIDGenerator
 {
     public function createID($idname='other')
     {
