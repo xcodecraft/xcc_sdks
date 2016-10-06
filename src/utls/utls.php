@@ -1,6 +1,6 @@
 <?php
 
-namespace xcc ;
+namespace XCC ;
 
 class NullProxy
 {
@@ -19,14 +19,19 @@ class NullProxy
 
 class EchoLogger
 {
-    public function error($msg) {
+    public function error($msg,$tag="") {
         echo "error: $msg \n" ;
     }
 
-    public function info($msg) {
+    public function info($msg,$tag="") {
         echo "info: $msg \n" ;
     }
-    public function debug($msg) {
+    public function debug($msg,$tag="") {
         echo "debug: $msg \n" ;
     }
+}
+
+class EmptyLogger
+{
+    public function __call($name,$params) {}
 }

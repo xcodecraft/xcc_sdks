@@ -10,5 +10,9 @@
         "host" : "3a6c14d1c517408d.redis.rds.aliyuncs.com" ,
         "port" : 6379 ,
         "auth" : "Ieq6kabZiGTgQPt"
+    },
+    "queue" : {
+        "xcc_queue_test" : ["127.0.0.1:11304", "127.0.0.1:11304"]
     }
+
 }

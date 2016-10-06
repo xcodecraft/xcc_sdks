@@ -1,6 +1,10 @@
 <?php
 namespace XCC ;
 
+require_once(dirname(dirname(__file__)) . "/libs/beanstalk/beanstalkmq.php") ;
+require_once(dirname(dirname(__file__)) . "/utls/utls.php") ;
+require_once(dirname(__file__) ."/impl/hydra_bstalk.php")  ;
+
 class HydraDTO
 {
     public $name ;
@@ -61,19 +65,17 @@ class HydraDTO
     }
 }
 
-class HydraEmptyLogger
-{
-    public function __call($name,$params) {}
-}
 
 class Hydra
 {
     static $logger = null ;
     static public function trigger($topic, $data, $tag=null,$delay=0,$ttl=60)
     {
-        require_once(dirname(__file__) ."/impl/hydra_bstalk.php")  ;
         static $impl           = null ;
-        if(empty(self::$logger)) self::$logger = new HydraEmptyLogger() ;
+        if(empty(self::$logger))
+        {
+            static::$logger = new EmptyLogger() ;
+        }
         if(empty($impl)) $impl = new HydraBStalk($logger);
         $dto       = HydraDTO::create($topic,$data,$tag) ;
         $dto->encode();
