@@ -1,7 +1,6 @@
 <?php
 namespace XCC ;
 $platform =  dirname(dirname(dirname(__FILE__)));
-require_once("$platform/hydra/beanstalk/beanstalkmq.php") ;
 require_once("$platform/hydra/impl/interface.php") ;
 require_once("$platform/hydra/impl/conf_loader.php") ;
 
