@@ -33,7 +33,7 @@ class QueueSvc
 
 ```
 
-# push 数据;
+# Push 数据;
 ```php
 
 $data  = [ "key" => "name" , "val" => "queue"] ;
@@ -78,6 +78,7 @@ public function testQueueConsumer()
 ```
 
 
+# Fetch 数据
 ```php
 
 list($flag,$dto)  = Queue::fetch("xcc_queue_test") ;
