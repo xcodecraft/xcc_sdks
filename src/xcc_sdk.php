@@ -10,3 +10,8 @@ class XSdkEnv
 
 }
 
+class Monitor
+{
+
+}
+
