@@ -1,5 +1,7 @@
 <?php
 namespace XCC ;
+require_once(dirname(dirname(__file__)) . "/libs/beanstalk/beanstalkmq.php") ;
+require_once(dirname(dirname(__file__)) . "/utls/utls.php") ;
 require_once(dirname(__file__) ."/impl/hydra_bstalk.php")  ;
 
 interface HydraConsume
@@ -44,7 +46,7 @@ class HydraSvc
     public function subscribe($topic,$client,HydraConsume $consumeObj,$logger=null)
     {
 
-        if(empty($logger)) $logger = new HydraEmptyLogger();
+        if(empty($logger)) $logger = new EmptyLogger();
         $cmd = new HydraCmd;
         $cmd->cmd           = "subscribe" ;
         $cmd->client        = $client ;
@@ -55,7 +57,7 @@ class HydraSvc
     }
     public function unSubscribe($topic,$client,$logger=null)
     {
-        if(empty($logger)) $logger = new HydraEmptyLogger();
+        if(empty($logger)) $logger = new EmptyLogger();
         $cmd = new HydraCmd;
         $cmd->cmd    = "unsubscribe" ;
         $cmd->client = $client ;
