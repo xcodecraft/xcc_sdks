@@ -79,9 +79,9 @@ class Queue
             $dto       = QueueDTO::create($topic,$data,$tag) ;
             $dto->encode();
             $json_data = json_encode($dto) ;
-            static::$logger->debug($json_data) ;
 
             if(empty(static::$logger)) static::$logger = new EmptyLogger() ;
+            static::$logger->debug($json_data) ;
             $ins   = static::rollIns($topic);
             $jobId = $ins->putInTube($topic, $json_data, $priority=1024, $delay=0, $ttl=60);
             static::$logger->debug("send $jobId @$topic") ;
