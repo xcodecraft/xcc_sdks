@@ -176,6 +176,7 @@ class QueueSvc
         {
             if (is_callable($stopFun) && call_user_func($stopFun,$job) == true )  return ;
             list($flag,$data) = Queue::fetch($topic,$timeout)  ;
+            if(is_null($data)) return;
             try{
                 $result = call_user_func($workFun, $data);
             }
