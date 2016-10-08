@@ -97,7 +97,7 @@ class Queue
         $result = false ;
         if( !$job )
         {
-            $logger->debug("no job ", $topic );
+            static::$logger->debug("no job ", $topic );
             return null ;
         }
         $jid  = $job->getId();
