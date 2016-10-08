@@ -176,15 +176,16 @@ class QueueSvc
         {
             if (is_callable($stopFun) && call_user_func($stopFun,$job) == true )  return ;
             list($flag,$data) = Queue::fetch($topic,$timeout)  ;
-            if(is_null($data)) return;
-            try{
-                $result = call_user_func($workFun, $data);
+            if(!is_null($data)){
+                try{
+                    $result = call_user_func($workFun, $data);
+                }
+                catch(Exception $e)
+                {
+                    $logger->warn("job failed: " . $e->getMessage(),$tag);
+                }
+                $flag($result);
             }
-            catch(Exception $e)
-            {
-                $logger->warn("job failed: " . $e->getMessage(),$tag);
-            }
-            $flag($result);
         }
 
     }
