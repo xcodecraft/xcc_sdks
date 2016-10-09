@@ -12,7 +12,7 @@ class XCCSDKTest  extends PHPUnit_Framework_TestCase
     public function testConfloader()
     {
 
-        $confObj   = XConfLoader::load("xcc") ;
+        $confObj   = XConfLoader::load("env") ;
         $data      = $confObj->xpath("/hydra/collectors") ;
         $this->assertTrue(!empty($data)) ;
 
