@@ -9,7 +9,7 @@ class XSdkCheck
     {
         XSdkEnv::init();
         $confObj = XConfLoader::load(XConfLoader::ENV) ;
-        assert(!empty($confObj->xpath("/env/xuuid"))) ;
+        assert(!empty($confObj->xpath("/xuuid"))) ;
         echo "\n...... check ok :) \n" ;
 
     }
