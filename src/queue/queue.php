@@ -79,9 +79,9 @@ class Queue
             $dto       = QueueDTO::create($topic,$data,$tag) ;
             $dto->encode();
             $json_data = json_encode($dto) ;
-            static::$logger->debug($json_data) ;
 
             if(empty(static::$logger)) static::$logger = new EmptyLogger() ;
+            static::$logger->debug($json_data) ;
             $ins   = static::rollIns($topic);
             $jobId = $ins->putInTube($topic, $json_data, $priority=1024, $delay=0, $ttl=60);
             static::$logger->debug("send $jobId @$topic") ;
@@ -97,7 +97,7 @@ class Queue
         $result = false ;
         if( !$job )
         {
-            $logger->debug("no job ", $topic );
+            static::$logger->debug("no job ", $topic );
             return null ;
         }
         $jid  = $job->getId();
@@ -176,14 +176,16 @@ class QueueSvc
         {
             if (is_callable($stopFun) && call_user_func($stopFun,$job) == true )  return ;
             list($flag,$data) = Queue::fetch($topic,$timeout)  ;
-            try{
-                $result = call_user_func($workFun, $data);
+            if(!is_null($data)){
+                try{
+                    $result = call_user_func($workFun, $data);
+                }
+                catch(Exception $e)
+                {
+                    $logger->warn("job failed: " . $e->getMessage(),$tag);
+                }
+                $flag($result);
             }
-            catch(Exception $e)
-            {
-                $logger->warn("job failed: " . $e->getMessage(),$tag);
-            }
-            $flag($result);
         }
 
     }
