@@ -6,7 +6,7 @@ _env:
                 root      : "${HOME}/devspace/${PRJ_NAME}"
                 name      : "${PRJ_NAME}"
             - !R.vars
-                XCC_SDKS    : "/data/x/sdks/xcc_sdks"
+                XCC_SDKS     : "/data/x/sdks/xcc_sdks"
                 SVC_UTLS     : "/data/x/libs/svc_utls"
                 PLATFORM_SDK : "/data/x/sdks/platform_sdks"
                 PHP_ERROR    : "E_ALL & ~E_NOTICE"

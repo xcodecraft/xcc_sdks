@@ -51,22 +51,28 @@ class XConfLoader
 {
     const XCC = "xcc" ;
     const ALI = "ali" ;
+    const ENV = "env" ;
 
     static private $reg_paths = array() ;
     static public function regist($name,$path)
     {
         static::$reg_paths[$name] = $path ;
     }
-    static public function registXCC($env_name)
-    {
-        static::regist(static::XCC,static::needEnv($env_name)) ;
-
-    }
-    static public function registALI($env_name)
-    {
-        static::regist(static::ALI,static::needEnv($env_name)) ;
-
-    }
+    // static public function registXCC($env_name)
+    // {
+    //     static::regist(static::XCC,static::needEnv($env_name)) ;
+    //
+    // }
+    // static public function registALI($env_name)
+    // {
+    //     static::regist(static::ALI,static::needEnv($env_name)) ;
+    //
+    // }
+    // static public function registEnv($env_name)
+    // {
+    //     static::regist(static::ENV,static::needEnv($env_name)) ;
+    //
+    // }
 
     static public function load($name)
     {

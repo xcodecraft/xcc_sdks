@@ -5,13 +5,9 @@ class XSdkEnv
 {
     static public function init()
     {
-        XConfLoader::regist(XConfLoader::XCC,"/data/x/etc/env_conf/conf/xcc/sdks_conf.json");
+        XConfLoader::regist(XConfLoader::ENV,"/data/x/etc/env_conf/run_env/env.json");
     }
 
 }
 
-class Monitor
-{
-
-}
 

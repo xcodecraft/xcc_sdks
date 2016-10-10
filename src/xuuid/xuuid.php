@@ -8,7 +8,7 @@ class Xuuid
         if ($ins == null)
         {
 
-            $confObj = XConfLoader::load(XConfLoader::XCC) ;
+            $confObj = XConfLoader::load(XConfLoader::ENV) ;
             $confs   = $confObj->xpath("/xuuid") ;
             $ins     = new \Memcache();
             foreach($confs as $conf)

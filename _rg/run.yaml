@@ -48,22 +48,14 @@ _env:
         _mix     : "_test,base"
 
 _sys:
-
-    # -  !R.system
-    #     _name : "local_proxy"
-    #     _res  :
-    #         - !R.vars
-    #             BASE_ONLINE : "mararun.cn"
-    #             BASE_DEMO  : "demo.mararun.cn"
-    #         - !R.using
-    #              path  : "${PRJ_ROOT}/_rg/mod.yaml"
-    #              modul : "vcl"
-    #              args  : !R.vars
-    #                 V_TAG           : "plato"
-    #                 V_DEMO_DOMAIN   : "api.plato.demo.mararun.cn"
-    #                 V_ONLINE_DOMAIN : "api.plato.mararun.cn"
-    #                 V_CHECK         : "/env/online/scene/self_monitor"
-
+    -  !R.system
+        _name : "check"
+        _res  :
+            - !R.vars
+                PHP_INI: "${PRJ_ROOT}/conf/used/test_php.ini"
+                INCLUDE_PATH : "${PRJ_ROOT}/src:${PRJ_ROOT}/test"
+            - !R.shell
+                script : "${PRJ_ROOT}/src/monitor.php"
 
     -  !R.system
         _name : "test"
