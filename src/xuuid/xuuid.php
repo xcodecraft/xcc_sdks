@@ -9,7 +9,7 @@ class Xuuid
         {
 
             $confObj = XConfLoader::load(XConfLoader::ENV) ;
-            $confs   = $confObj->xpath("/xuuid") ;
+            $confs   = $confObj->xpath("/env/xuuid") ;
             $ins     = new \Memcache();
             foreach($confs as $conf)
             {

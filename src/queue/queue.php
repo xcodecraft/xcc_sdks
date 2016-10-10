@@ -145,7 +145,7 @@ class Queue
         }
         $queues[$topic] = array() ;
         $confObj        = XConfLoader::load(XConfLoader::ENV) ;
-        $qConfs         = $confObj->xpath("/queue/$topic") ;
+        $qConfs         = $confObj->xpath("/env/queue/$topic") ;
         static::$logger->debug( "queue [$topic] use $conf" ) ;
         foreach( $qConfs as $conf)
         {
