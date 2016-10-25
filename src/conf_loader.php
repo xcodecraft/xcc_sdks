@@ -3,6 +3,7 @@
 namespace XCC;
 use LogicException ;
 
+
 class XConfObj
 {
 
