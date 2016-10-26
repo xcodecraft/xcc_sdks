@@ -10,7 +10,6 @@ class MyConsume implements QueueConsume
 {
     public function consume(QueueDTO $dto)
     {
-        var_dump($dto->data) ;
     }
     public function needStop($job)
     {

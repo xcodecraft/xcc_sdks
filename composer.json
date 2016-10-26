@@ -1,3 +1,6 @@
 {
-    "name": "xcodecraft/xcc_sdks"
+    "name": "xcodecraft/xcc_sdks",
+    "require": {
+        "xcodecraft/pylon.autoload": "^0.1"
+    }
 }

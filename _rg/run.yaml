@@ -64,6 +64,7 @@ _sys:
                 PHP_INI: "${PRJ_ROOT}/conf/used/test_php.ini"
                 INCLUDE_PATH : "${PRJ_ROOT}/src:${PRJ_ROOT}/test"
                 PYLON  : "/data/x/framework/pylon-ng/"
+                INDEX_PATH : "${RUN_PATH}/autoload"
 
             - !R.pylon_autoload
                 include : "${PRJ_ROOT}/src"
@@ -72,12 +73,7 @@ _sys:
                  tpl    : "${PRJ_ROOT}/conf/options/test_php.ini"
                  dst    : "${PHP_INI}"
                     #
-            # - !R.pylon_router
-            #     include : "${API_ENTRY}"
             - !R.php
-                # bin     : "${PHP_BIN}"
                 script  : "/usr/local/php/bin/phpunit"
                 args    : "--configuration ${PRJ_ROOT}/test/phpunit.xml --coverage-clover test/reports/phpunit.coverage.xml --log-junit test/reports/phpunit.report.xml"
-            #- !R.shell
-            #    script : "${PRJ_ROOT}/src/demo.sh"
 

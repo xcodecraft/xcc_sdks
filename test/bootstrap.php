@@ -1,8 +1,6 @@
 <?php
-include "pylon/pylon.php" ;
-XSetting::$logMode   = XSetting::LOG_DEBUG_MODE ;
-XSetting::$prjName   = "hydra" ;
-XSetting::$logTag    = XSetting::ensureEnv("USER") ;
-XSetting::$runPath   = XSetting::ensureEnv("RUN_PATH") ;
-XSetting::$bootstrap = "pylonstrap.php" ;
-XPylon::useEnv() ;
+include  dirname(dirname(__file__)) . "/vendor/xcodecraft/pylon.autoload/src/autoload.php" ;
+use XCC\XConfLoader ;
+$dataPath  = getenv("PRJ_ROOT") ;
+$dataPath .= "/test/data/conf.json" ;
+XConfLoader::regist("env",$dataPath) ;

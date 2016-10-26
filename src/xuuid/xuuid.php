@@ -2,21 +2,36 @@
 namespace XCC ;
 class Xuuid
 {
+    static public function cacheGet($key,$fun,$ttl)
+    {
+        if(apcu_exists($key)){
+            return apcu_fetch($key);
+        }
+        $data =  call_user_func($fun) ;
+        apcu_store($key,$data,$ttl);
+        return $data;
+    }
     static public function id()
     {
         static $ins  = null ;
-        if ($ins == null)
+        static $uuid = 0 ;
+        if ($uuid == 0 )
         {
-
-            $confObj = XConfLoader::load(XConfLoader::ENV) ;
-            $confs   = $confObj->xpath("/xuuid") ;
-            $ins     = new \Memcache();
-            foreach($confs as $conf)
+            if ($ins == null)
             {
-                $ins->addServer($conf['host'],$conf['port']);
-            }
 
+                $confObj = XConfLoader::load(XConfLoader::ENV) ;
+                $confs   = $confObj->xpath("/xuuid") ;
+                $ins     = new \Memcache();
+                foreach($confs as $conf)
+                {
+                    $ins->addServer($conf['host'],$conf['port']);
+                }
+
+            }
+            $uuid = (int)( $ins->get("uuid")) ;
         }
-        return  $ins->get("uuid") ;
+        $uuid ++ ;
+        return $uuid ;
     }
 }
