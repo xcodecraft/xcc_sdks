@@ -16,3 +16,4 @@ doc
 /src/conf/sdks_conf.php
 test/reports/
 vendor
+composer.lock
