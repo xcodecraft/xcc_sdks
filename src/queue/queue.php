@@ -100,6 +100,7 @@ class Queue
             static::$logger->debug("no job ", $topic );
             return null ;
         }
+        $Q->bury($job);
         $jid  = $job->getId();
         $data = $job->getData();
         static::$logger->debug("get job:$jid",$topic) ;
@@ -119,7 +120,8 @@ class Queue
                 $Q->delete($job);
             }
             else {
-                $Q->release($job, 1024, Queue::RTY_TIME );
+#                $Q->release($job, 1024, Queue::RTY_TIME );
+                $Q->kickJob($job);
             }
         };
         return [$call,$obj] ;
