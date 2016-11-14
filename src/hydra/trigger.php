@@ -76,6 +76,12 @@ class Hydra
         {
             static::$logger = new EmptyLogger() ;
         }
+        $events = HydraConfLoader::getEvents();
+        if (! in_array($topic,$events))
+        {
+            throw new \RuntimeException( "Hydra not support this event: $topic");
+        }
+
         if(empty($impl)) $impl = new HydraBStalk($logger);
         $dto       = HydraDTO::create($topic,$data,$tag) ;
         $dto->encode();

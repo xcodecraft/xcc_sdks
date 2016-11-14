@@ -46,5 +46,11 @@ class HydraConfLoader
         $confObj  = XConfLoader::load(XConfLoader::ENV) ;
         return $confObj->xpath("/hydra/collectors") ;
     }
+    static public function getEvents()
+    {
+        $confObj  = XConfLoader::load(XConfLoader::ENV) ;
+        return $confObj->xpath("/hydra/events") ;
+
+    }
 
 }
