@@ -1,10 +1,10 @@
 <?php
 namespace XCC ;
-require_once(dirname(dirname(__file__)) ."/conf_loader.php")  ;
+require_once(dirname(dirname(__file__)) ."/xcc_sdk.php")  ;
 require_once(dirname(__file__) ."/hydra.php")  ;
 
+XSdkEnv::init() ;
 
-XConfLoader::regist(XConfLoader::XCC,"/data/x/etc/env_conf/conf/xcc/sdks_conf.json") ;
 
 $g_debug = false ;
 if ($argc == 2 && $argv[1] == "-d" )
@@ -109,5 +109,4 @@ $consumer->subscribe("ping","Hping",new ConsumePing);
 sleep(1) ;
 ping::send();
 $consumer->serving($logger,1);
-
 $consumer->unsubscribe("ping","Hping");

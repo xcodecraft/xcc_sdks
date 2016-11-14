@@ -38,12 +38,12 @@ class HydraConfLoader
 
     static public function getSubscibes()
     {
-        $confObj  = XConfLoader::load(XConfLoader::XCC) ;
+        $confObj  = XConfLoader::load(XConfLoader::ENV) ;
         return $confObj->xpath("/hydra/subscibes") ;
     }
     static public function getCollectors()
     {
-        $confObj  = XConfLoader::load(XConfLoader::XCC) ;
+        $confObj  = XConfLoader::load(XConfLoader::ENV) ;
         return $confObj->xpath("/hydra/collectors") ;
     }
 
