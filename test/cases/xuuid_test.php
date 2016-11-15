@@ -9,7 +9,7 @@ class XuuidTest extends PHPUnit_Framework_TestCase
         for($i =0 ; $i < 100 ; $i++)
         {
             $uid = Xuuid::id() ;
-            echo $uid ;
+            echo "$uid," ;
         }
     }
 }

@@ -14,24 +14,19 @@ class Xuuid
     static public function id()
     {
         static $ins  = null ;
-        static $uuid = 0 ;
-        if ($uuid == 0 )
+        if ($ins == null)
         {
-            if ($ins == null)
+
+            $confObj = XConfLoader::load(XConfLoader::ENV) ;
+            $confs   = $confObj->xpath("/xuuid") ;
+            $ins     = new \Memcache();
+            foreach($confs as $conf)
             {
-
-                $confObj = XConfLoader::load(XConfLoader::ENV) ;
-                $confs   = $confObj->xpath("/xuuid") ;
-                $ins     = new \Memcache();
-                foreach($confs as $conf)
-                {
-                    $ins->addServer($conf['host'],$conf['port']);
-                }
-
+                $ins->addServer($conf['host'],$conf['port']);
             }
-            $uuid = (int)( $ins->get("uuid")) ;
+
         }
-        $uuid ++ ;
+        $uuid =  $ins->get("uuid") ;
         return $uuid ;
     }
 }
