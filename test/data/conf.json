@@ -6,6 +6,9 @@
         "collectors" : ["127.0.0.1:11300"] ,
         "subscibes"   : ["127.0.0.1:11301","127.0.0.1:11302"]
     },
+    "stat" : {
+        "sentry_dsn" : "http://3601a9de29754eeb992ca29b12a94396:6df7f14a75024a0bbd7ad413b519b26a@sentry.mararun.cn/8"
+    },
     "kvstore" : {
         "host" : "3a6c14d1c517408d.redis.rds.aliyuncs.com" ,
         "port" : 6379 ,
