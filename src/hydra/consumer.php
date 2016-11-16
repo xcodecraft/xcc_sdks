@@ -28,7 +28,7 @@ class HydraSvc
         $consumeObj = $this->consumeObj ;
         $tag        = "consume:@$topic" ;
         $host       = gethostname() ;
-        XCCSetting::get_stat()->stat("$topic-$host");
+        XCCSetting::get_stat()->stat("HydraSvc:$topic-$host");
         $call = function ($data)use($consumeObj,$logger,$tag)
         {
             $logger->debug("job data:" . $data , $tag) ;
