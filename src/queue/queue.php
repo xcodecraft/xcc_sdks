@@ -131,7 +131,7 @@ class Queue
     static private function rollIns($topic)
     {
         static $index  = 0 ;
-        $queues = self::insConnect($topic,$logger);
+        $queues = self::insConnect($topic);
         $ins    = $queues[$index] ;
         $index ++ ;
         if($index >= count($queues) ) $index =0 ;
@@ -179,7 +179,7 @@ class QueueSvc
 
             $host       = $_SERVER['HOSTNAME'] ;
             XCCSetting::get_stat()->stat("$topic-$host");
-            if (is_callable($stopFun) && call_user_func($stopFun,$job) == true )  return ;
+            if (is_callable($stopFun) && call_user_func($stopFun,$job=null) == true )  return ;
             list($flag,$data) = Queue::fetch($topic,$timeout)  ;
             if(!is_null($data)){
                 try{

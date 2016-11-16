@@ -22,7 +22,7 @@ class Xuuid
             $ins     = new \Memcache();
             foreach($confs as $conf)
             {
-                $ins->addServer($conf['host'],$conf['port']);
+                $ins->addServer($conf['host'],$conf['port'],true);
             }
 
         }
