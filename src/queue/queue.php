@@ -148,7 +148,7 @@ class Queue
         $queues[$topic] = array() ;
         $confObj        = XConfLoader::load(XConfLoader::ENV) ;
         $qConfs         = $confObj->xpath("/queue/$topic") ;
-        static::$logger->debug( "queue [$topic] use $conf" ) ;
+        static::$logger->debug( "queue [$topic] " ) ;
         foreach( $qConfs as $conf)
         {
             list($host,$port) = explode(':',$conf) ;
