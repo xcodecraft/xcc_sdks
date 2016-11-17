@@ -177,13 +177,13 @@ class QueueSvc
         while(true)
         {
 
-            $host  = gethostname();
-            XCCSetting::get_stat()->stat("QueueSvc:$topic-$host");
             if (is_callable($stopFun) && call_user_func($stopFun,$job=null) == true )  return ;
             list($flag,$data) = Queue::fetch($topic,$timeout)  ;
             if(!is_null($data)){
                 try{
                     $result = call_user_func($workFun, $data);
+                    $host   = gethostname();
+                    XCCSetting::get_stat()->stat("QueueSvc:$topic-$host:SUC");
                 }
                 catch(Exception $e)
                 {
