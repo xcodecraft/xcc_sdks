@@ -74,6 +74,8 @@ class Queue
 {
     static $logger = null ;
     CONST RTY_TIME = 10; // 任务重试时间
+    CONST MYSQL_EXCEPTION = "MySQL server has gone away";
+
     static public function push($topic, $data,$tag="" )
     {
             $dto       = QueueDTO::create($topic,$data,$tag) ;
@@ -190,9 +192,12 @@ class QueueSvc
                     $logger->warn("job failed: " . $e->getMessage(),$tag);
                 }
                 $flag($result);
+                if($result==Queue::MYSQL_EXCEPTION){
+                    $logger->warn("mysql exception,worker restart");
+                    exit(-2);
+                }
             }
         }
-
     }
 
 
