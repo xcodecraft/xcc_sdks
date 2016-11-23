@@ -192,8 +192,8 @@ class QueueSvc
                     $logger->warn("job failed: " . $e->getMessage(),$tag);
                 }
                 $flag($result);
-                if($result==Queue::MYSQL_EXCEPTION){
-                    $logger->warn("mysql exception,worker restart");
+                if($result==-1){
+                    $logger->warn("worker restart");
                     exit(-2);
                 }
             }
