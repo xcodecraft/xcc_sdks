@@ -192,7 +192,7 @@ class QueueSvc
                     $logger->warn("job failed: " . $e->getMessage(),$tag);
                 }
                 $flag($result);
-                if($result==-1){
+                if($result===-1){
                     $logger->warn("worker restart");
                     exit(-2);
                 }
