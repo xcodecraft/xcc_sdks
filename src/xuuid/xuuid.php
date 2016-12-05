@@ -26,7 +26,22 @@ class Xuuid
             }
 
         }
-        $uuid =  $ins->get("uuid") ;
-        return $uuid ;
+        for($i = 0 ; $i< 10 ; $i++ )
+        {
+            $uuid =  $ins->get("uuid") ;
+            if(!empty($uuid) )
+            {
+                return $uuid ;
+            }
+            else 
+            {
+                if (class_exists('XLogKit'))
+                {
+                    \XLogKit::logger("main")->error("xuuid is empty!") ;
+
+                }
+            }
+        }
+        throw new \RuntimeException("没有正确生成对象ID $uuid") ;
     }
 }
