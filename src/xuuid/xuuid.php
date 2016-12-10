@@ -1,5 +1,24 @@
 <?php
 namespace XCC ;
+class XuuidServer
+{
+    public function __construct()
+    {
+        $this->ins = new \Memcache();
+    }
+
+    public function __destruct()
+    {
+        $this->ins->close();
+        unset($this->ins);
+    }
+
+    public function __call($method,$args)
+    {
+        return call_user_func_array(array($this->ins,$method),$args);
+    }
+}
+
 class Xuuid
 {
     static public function cacheGet($key,$fun,$ttl)
@@ -19,7 +38,7 @@ class Xuuid
 
             $confObj = XConfLoader::load(XConfLoader::ENV) ;
             $confs   = $confObj->xpath("/xuuid") ;
-            $ins     = new \Memcache();
+            $ins     = new XuuidServer();
             foreach($confs as $conf)
             {
                 $ins->addServer($conf['host'],$conf['port'],true);
@@ -33,7 +52,7 @@ class Xuuid
             {
                 return $uuid ;
             }
-            else 
+            else
             {
                 if (class_exists('XLogKit'))
                 {
