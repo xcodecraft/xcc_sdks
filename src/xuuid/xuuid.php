@@ -41,7 +41,7 @@ class Xuuid
             $ins     = new XuuidServer();
             foreach($confs as $conf)
             {
-                $ins->addServer($conf['host'],$conf['port']);
+                $ins->addServer($conf['host'],$conf['port'],false);
             }
 
         }
