@@ -185,7 +185,6 @@ class QueueSvc
                 try{
                     $result = call_user_func($workFun, $data);
                     $host   = gethostname();
-                    XCCSetting::get_stat()->stat("QueueSvc:$topic-$host:SUC");
                 }
                 catch(Exception $e)
                 {

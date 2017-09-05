@@ -30,7 +30,6 @@ class HydraSvc
         $call = function ($data)use($consumeObj,$logger,$tag)
         {
             $host       = gethostname() ;
-            XCCSetting::get_stat()->stat("HydraSvc:$tag-$host");
             $logger->debug("job data:" . $data , $tag) ;
             $obj = HydraDTO::fromJson($data) ;
             if($obj == null)

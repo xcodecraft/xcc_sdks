@@ -6,7 +6,6 @@ class XSdkEnv
     static public function init()
     {
         XConfLoader::regist(XConfLoader::ENV,"/data/x/etc/env_conf/run_env/env.json");
-        XCCSetting::reg_stat(function(){ return new SentryStat() ; }) ;
     }
 
 }

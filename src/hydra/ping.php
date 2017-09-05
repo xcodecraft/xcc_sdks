@@ -6,7 +6,6 @@ require_once(dirname(dirname(__file__)) ."/stat/stat_impl.php")  ;
 require_once(dirname(__file__) ."/hydra.php")  ;
 
 XSdkEnv::init() ;
-XCCSetting::reg_stat(function(){ return new EmptyStat() ; }) ;
 
 
 $g_debug = false ;
